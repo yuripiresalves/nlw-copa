@@ -9,7 +9,10 @@ import {
 import { SignIn } from './src/screens/SignIn';
 import { Loading } from './src/components/Loading';
 
+import { AuthContextProvider } from './src/contexts/AuthContext';
+
 import { THEME } from './src/styles/theme';
+import { Pools } from './src/screens/Pools';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -20,13 +23,15 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={THEME}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-      />
+      <AuthContextProvider>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="transparent"
+          translucent
+        />
 
-      {fontsLoaded ? <SignIn /> : <Loading />}
+        {fontsLoaded ? <Pools /> : <Loading />}
+      </AuthContextProvider>
     </NativeBaseProvider>
   );
 }
